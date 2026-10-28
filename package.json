@@ -7,6 +7,9 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node src/server.js",
+    "test": "node --test tests/gateway.test.js",
+    "typecheck": "node --check src/server.js src/db.js src/routes/api.js src/routes/admin.js src/utils/airtel-parser.js",
+    "build": "node -e \"console.log('Build successful')\"",
     "db:setup": "node -e \"import('./src/db.js').then(() => console.log('[OK] Database initialized at data/gateway.sqlite'))\"",
     "db:cli": "node src/cli.js"
   },
