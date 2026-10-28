@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cortex UPI Gateway — Developer Portal & Integration Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .credentials-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      margin-bottom: 32px;
+    }
+    .cred-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .cred-title {
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cred-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 768px) {
+      .cred-grid { grid-template-columns: 1fr; }
+    }
+    .cred-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .cred-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cred-val-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .cred-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e293b;
+      word-break: break-all;
+    }
+    .btn-copy-sm {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .btn-copy-sm:hover {
+      background: #f1f5f9;
+      color: var(--primary);
+    }
+    .btn-regen {
+      background: #eef2ff;
+      color: var(--primary);
+      border: 1px solid #c7d2fe;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-regen:hover {
+      background: var(--primary);
+      color: white;
+    }
+    .lang-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px;
+      background: #0f172a;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      color: white;
+      background: #1e293b;
+    }
+    .tab-btn.active {
+      color: white;
+      background: var(--primary);
+    }
+    .code-container {
+      background: #090d16;
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      position: relative;
+    }
+    .code-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 18px;
+      background: #0d1322;
+      border-bottom: 1px solid #1a2235;
+      font-size: 12px;
+      color: #64748b;
+    }
+    .code-content {
+      padding: 20px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #38bdf8;
+      max-height: 480px;
+    }
+    .test-box {
+      margin-top: 36px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-badge">⚡</div>
+        <div class="logo-text">CORTEX <span>UPI</span></div>
+      </div>
+      <div class="nav-links">
+        <a href="/" class="active">API & Integration</a>
+        <a href="/admin">Admin Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="badge-pill">⚡ Sovereign Peer-to-Peer UPI Payment Gateway</div>
+    <h1 class="hero-title">Developer Integration & Merchant API</h1>
+    <p class="hero-desc">Direct bank settlement with zero aggregator commission. Integrate instant UPI checkout into your apps, websites, scripts, and workflows in seconds.</p>
+  </header>
+
+  <main class="store-container">
+    <!-- Merchant API Key & Access Token Card -->
+    <div class="credentials-card">
+      <div class="cred-header">
+        <div class="cred-title">
+          <span>🔑 Your API Key & Access Token</span>
+          <span style="font-size: 12px; font-weight: 500; color: #10b981; background: #ecfdf5; padding: 2px 8px; border-radius: 12px;">Active & Live</span>
+        </div>
+        <button class="btn-regen" onclick="generateNewCredentials()">⚡ Generate Random Credentials</button>
+      </div>
+
+      <div class="cred-grid">
+        <div class="cred-box">
+          <div class="cred-label">
+            <span>Merchant API Key (X-API-Key)</span>
+            <button class="btn-copy-sm" onclick="copyText('apiKeyVal', this)">Copy</button>
+          </div>
+          <div class="cred-val-row">
+            <span class="cred-val" id="apiKeyVal">Loading...</span>
+          </div>
+        </div>
+
+        <div class="cred-box">
+          <div class="cred-label">
+            <span>Bearer Access Token (Authorization)</span>
+            <button class="btn-copy-sm" onclick="copyText('accessTokenVal', this)">Copy</button>
+          </div>
+          <div class="cred-val-row">
+            <span class="cred-val" id="accessTokenVal">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Integrate Into Your Website Section -->
+    <section class="integration-section" style="margin-top: 0;">
+      <div class="integration-card" style="padding: 0; overflow: hidden; background: transparent; border: none; box-shadow: none;">
+        <div class="int-header" style="background: white; border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 20px;">
+          <span class="int-badge">MULTI-LANGUAGE EXAMPLES</span>
+          <h3>Integrate into Your Own Website in 30 Seconds</h3>
+          <p>The code below is dynamically configured with your active Gateway host, API Key, and Bearer Access Token. Copy and paste into your project:</p>
+        </div>
+
+        <!-- Language Tabs -->
+        <div class="lang-tabs">
+          <button class="tab-btn active" onclick="switchTab('curl')">cURL</button>
+          <button class="tab-btn" onclick="switchTab('nodejs')">Node.js (JavaScript)</button>
+          <button class="tab-btn" onclick="switchTab('python')">Python</button>
+          <button class="tab-btn" onclick="switchTab('php')">PHP</button>
+          <button class="tab-btn" onclick="switchTab('gas')">Google Apps Script (Code.gs)</button>
+        </div>
+
+        <!-- Code Block Viewport -->
+        <div class="code-container">
+          <div class="code-toolbar">
+            <span id="tabLangLabel">BASH TERMINAL (cURL)</span>
+            <button class="btn-copy-sm" onclick="copyCurrentCode(this)" style="background: #1e293b; color: white; border-color: #334155;">Copy Code</button>
+          </div>
+          <pre class="code-content"><code id="codeDisplay">Loading code snippet...</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Instant Sandbox Payment Test Box -->
+    <div class="test-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+        <div>
+          <h3 style="font-size: 18px; font-weight: 800;">🧪 Instant Checkout Sandbox Tester</h3>
+          <p style="color: var(--text-muted); font-size: 13px;">Test your checkout modal experience live right from this portal.</p>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-buy" onclick="launchTestModal(1)">Test ₹1 Payment</button>
+          <button class="btn-buy" style="background:#0f172a;" onclick="launchTestModal(499)">Test ₹499 Payment</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>⚡ Cortex UPI Payment Gateway • Sovereign White-Label Architecture • VPS & Render Ready</p>
+  </footer>
+
+  <!-- Include Gateway Universal SDK -->
+  <script src="/youpi.js"></script>
+
+  <script>
+    let currentApiKey = 'ctx_live_key_demo';
+    let currentAccessToken = 'ctx_sec_token_demo';
+    let currentTab = 'curl';
+
+    // Dynamically derive current host (supports localhost, VPS, Render, or custom domains!)
+    const currentOrigin = window.location.origin;
+
+    async function loadCredentials() {
+      try {
+        const res = await fetch('/api/credentials');
+        const data = await res.json();
+        if (data.success && data.credentials) {
+          currentApiKey = data.credentials.api_key;
+          currentAccessToken = data.credentials.access_token;
+
+          document.getElementById('apiKeyVal').innerText = currentApiKey;
+          document.getElementById('accessTokenVal').innerText = currentAccessToken;
+
+          renderCodeSnippet();
+        }
+      } catch (err) {
+        console.error('Failed to load credentials:', err);
+      }
+    }
+
+    async function generateNewCredentials() {
+      try {
+        const res = await fetch('/api/credentials/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ merchant_name: 'Merchant ' + new Date().toLocaleTimeString() })
+        });
+        const data = await res.json();
+        if (data.success && data.credentials) {
+          currentApiKey = data.credentials.api_key;
+          currentAccessToken = data.credentials.access_token;
+
+          document.getElementById('apiKeyVal').innerText = currentApiKey;
+          document.getElementById('accessTokenVal').innerText = currentAccessToken;
+
+          renderCodeSnippet();
+          alert('✓ New API Key & Access Token generated successfully!');
+        }
+      } catch (err) {
+        alert('[-] ' + err.message);
+      }
+    }
+
+    const snippets = {
+      curl: () => `curl -X POST "${currentOrigin}/api/orders/create" \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer ${currentAccessToken}" \\
+  -H "X-API-Key: ${currentApiKey}" \\
+  -d '{
+    "amount": 499.00,
+    "order_id": "ORD_${Date.now()}",
+    "product_name": "Digital Membership",
+    "customer_name": "Rohan Sharma",
+    "customer_email": "rohan@example.com",
+    "customer_phone": "9876543210"
+  }'`,
+
+      nodejs: () => `// Node.js (JavaScript) — ES Modules or CommonJS
+const response = await fetch('${currentOrigin}/api/orders/create', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ${currentAccessToken}',
+    'X-API-Key': '${currentApiKey}'
+  },
+  body: JSON.stringify({
+    amount: 499.00,
+    order_id: 'ORD_' + Date.now(),
+    product_name: 'Digital Membership',
+    customer_name: 'Rohan Sharma',
+    customer_email: 'rohan@example.com',
+    customer_phone: '9876543210'
+  })
+});
+
+const data = await response.json();
+console.log('Checkout URL:', data.order.checkout_url);
+console.log('Dynamic QR Data:', data.order.qr_data_url);
+console.log('Mobile Intent URLs:', data.order.intents);`,
+
+      python: () => `# Python 3 (using requests library)
+import requests
+
+url = "${currentOrigin}/api/orders/create"
+
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer ${currentAccessToken}",
+    "X-API-Key": "${currentApiKey}"
+}
+
+payload = {
+    "amount": 499.00,
+    "order_id": "ORD_PY_1001",
+    "product_name": "Digital Membership",
+    "customer_name": "Rohan Sharma",
+    "customer_email": "rohan@example.com",
+    "customer_phone": "9876543210"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+data = response.json()
+
+if data.get("success"):
+    print("Checkout URL:", data["order"]["checkout_url"])
+    print("UPI Intent String:", data["order"]["upi_string"])
+else:
+    print("Error:", data.get("error"))`,
+
+      php: () => `<?php
+// PHP cURL Integration
+$url = "${currentOrigin}/api/orders/create";
+
+$payload = json_encode([
+    "amount" => 499.00,
+    "order_id" => "ORD_PHP_" . time(),
+    "product_name" => "Digital Membership",
+    "customer_name" => "Rohan Sharma",
+    "customer_email" => "rohan@example.com",
+    "customer_phone" => "9876543210"
+]);
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Content-Type: application/json",
+    "Authorization: Bearer ${currentAccessToken}",
+    "X-API-Key: ${currentApiKey}"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$data = json_decode($response, true);
+echo "Checkout URL: " . $data["order"]["checkout_url"] . "\\n";
+?>`,
+
+      gas: () => `// Google Apps Script (Code.gs)
+function createUpiPaymentOrder() {
+  const gatewayUrl = "${currentOrigin}/api/orders/create";
+  const accessToken = "${currentAccessToken}";
+  const apiKey = "${currentApiKey}";
+
+  const payload = {
+    amount: 499.00,
+    order_id: "ORD_GAS_" + new Date().getTime(),
+    product_name: "Google Sheets VIP Service",
+    customer_name: "Rohan Sharma",
+    customer_email: "rohan@example.com",
+    customer_phone: "9876543210"
+  };
+
+  const options = {
+    method: "post",
+    contentType: "application/json",
+    headers: {
+      "Authorization": "Bearer " + accessToken,
+      "X-API-Key": apiKey
+    },
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  };
+
+  const response = UrlFetchApp.fetch(gatewayUrl, options);
+  const json = JSON.parse(response.getContentText());
+
+  if (json.success) {
+    Logger.log("Checkout URL: " + json.order.checkout_url);
+    return json.order.checkout_url;
+  } else {
+    Logger.log("Error: " + json.error);
+    throw new Error(json.error);
+  }
+}`
+    };
+
+    function switchTab(lang) {
+      currentTab = lang;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const labels = {
+        curl: 'BASH TERMINAL (cURL)',
+        nodejs: 'NODE.JS (JAVASCRIPT FETCH)',
+        python: 'PYTHON 3 (REQUESTS)',
+        php: 'PHP (CURL)',
+        gas: 'GOOGLE APPS SCRIPT (CODE.GS)'
+      };
+      document.getElementById('tabLangLabel').innerText = labels[lang] || lang.toUpperCase();
+      renderCodeSnippet();
+    }
+
+    function renderCodeSnippet() {
+      const generator = snippets[currentTab] || snippets.curl;
+      document.getElementById('codeDisplay').innerText = generator();
+    }
+
+    function copyText(elementId, btn) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text);
+      const original = btn.innerText;
+      btn.innerText = 'Copied!';
+      setTimeout(() => btn.innerText = original, 2000);
+    }
+
+    function copyCurrentCode(btn) {
+      const code = document.getElementById('codeDisplay').innerText;
+      navigator.clipboard.writeText(code);
+      const original = btn.innerText;
+      btn.innerText = 'Copied!';
+      setTimeout(() => btn.innerText = original, 2000);
+    }
+
+    function launchTestModal(amount) {
+      Youpi.pay({
+        amount: amount,
+        order_id: 'SANDBOX_' + Date.now().toString(36).toUpperCase(),
+        product_name: 'Sandbox Test Order',
+        customer: { name: 'Sandbox Buyer', email: 'buyer@test.com' },
+        handler: function(response) {
+          console.log('[Sandbox] Payment verified:', response);
+        }
+      });
+    }
+
+    loadCredentials();
+  </script>
+</body>
+</html>

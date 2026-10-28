@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cortex Gateway — Merchant Command & Airtel Bank Soundbox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+    }
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .metric-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    }
+    .metric-title {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .metric-val {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 860px) {
+      .grid-2col { grid-template-columns: 1fr; }
+    }
+    .panel {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+    }
+    .panel-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .soundbox-card {
+      background: linear-gradient(135deg, #090e17, #131d2e);
+      color: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .soundbox-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .airtel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e11d48;
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+    .soundbox-pulse {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: soundpulse 1.4s infinite;
+    }
+    @keyframes soundpulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(1.4); }
+    }
+    .airtel-login-btn-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .btn-airtel-login {
+      background: linear-gradient(135deg, #e11d48, #be123c);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: filter 0.15s;
+    }
+    .btn-airtel-login:hover { filter: brightness(1.15); }
+    .soundbox-screen {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      min-height: 95px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .soundbox-live-amount {
+      font-size: 32px;
+      font-weight: 800;
+      color: #38bdf8;
+      letter-spacing: -0.5px;
+    }
+    .soundbox-live-desc {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+    .soundbox-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #cbd5e1;
+      cursor: pointer;
+    }
+    .btn-sound-test {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-sound-test:hover { background: #0369a1; }
+    
+    .ingest-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .ingest-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ingest-input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #38bdf8;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      outline: none;
+      margin-bottom: 8px;
+    }
+    .ingest-input:focus { border-color: #38bdf8; }
+    .btn-ingest-action {
+      background: #10b981;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-ingest-action:hover { background: #059669; }
+    .btn-sample {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .btn-sample:hover { color: white; border-color: white; }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 6px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--ring);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-secondary:hover { background: #e2e8f0; }
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+    th {
+      padding: 12px 14px;
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      color: #1e293b;
+    }
+    tr:last-child td { border-bottom: none; }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .status-PAID { background: #dcfce7; color: #15803d; }
+    .status-PENDING { background: #fef3c7; color: #b45309; }
+    .status-FAILED { background: #fee2e2; color: #b91c1c; }
+    .btn-sm-action {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-sm-action:hover { background: #059669; }
+
+    /* Ledger Tabs & Inbound Messages Styles */
+    .ledger-tab-group {
+      display: inline-flex;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 12px;
+      gap: 4px;
+      border: 1px solid var(--border);
+    }
+    .ledger-tab-btn {
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748b;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .ledger-tab-btn:hover {
+      color: #1e293b;
+    }
+    .ledger-tab-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .tab-count-badge {
+      background: #e2e8f0;
+      color: #475569;
+      font-size: 11px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 800;
+    }
+    .ledger-tab-btn.active .tab-count-badge {
+      background: #e0e7ff;
+      color: var(--primary);
+    }
+    .msg-raw-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #1e293b;
+      background: #f8fafc;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      max-width: 420px;
+      word-break: break-word;
+      white-space: pre-wrap;
+      line-height: 1.4;
+    }
+    .status-MATCHED { background: #dcfce7; color: #15803d; }
+    .status-UNMATCHED { background: #fef3c7; color: #b45309; }
+    .status-UNPARSED { background: #fee2e2; color: #b91c1c; }
+
+    /* MacroDroid Automation Card Styles */
+    .macro-panel {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+      margin-bottom: 28px;
+    }
+    .macro-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .macro-step-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .macro-step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 800;
+      margin-right: 8px;
+    }
+    .macro-code {
+      background: #0f172a;
+      color: #38bdf8;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-badge">⚡</div>
+        <div class="logo-text">CORTEX <span>ADMIN</span></div>
+      </div>
+      <div class="nav-links">
+        <a href="/">Developer Hub</a>
+        <a href="/admin" class="active">Admin Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="admin-container">
+    <!-- Header -->
+    <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <h1 style="font-size: 28px; font-weight: 800;">Merchant Command Center</h1>
+        <p style="color: var(--text-muted); font-size: 14px;">Airtel Payments Bank live transaction observation, voice soundbox alerts & settlements.</p>
+      </div>
+      <button class="btn-primary" onclick="loadDashboard()">🔄 Refresh Ledger</button>
+    </div>
+
+    <!-- Summary Metrics -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-title">Total Volume Settled</div>
+        <div class="metric-val" id="mVolume">₹0.00</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Paid Transactions</div>
+        <div class="metric-val" id="mPaid">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Pending Orders</div>
+        <div class="metric-val" id="mPending">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Total Orders</div>
+        <div class="metric-val" id="mTotal">0</div>
+      </div>
+    </div>
+
+    <!-- 2 Columns: Settings & Airtel Payments Bank Live Soundbox Terminal -->
+    <div class="grid-2col">
+      <!-- UPI & Webhook Settings -->
+      <div class="panel">
+        <div class="panel-title">
+          <span>⚙️ Receiving UPI & Gateway Settings</span>
+        </div>
+        <form id="settingsForm" onsubmit="saveSettings(event)">
+          <div class="form-group">
+            <label>Receiving UPI ID (VPA):</label>
+            <input type="text" id="upiVpa" class="form-control" placeholder="e.g. yourname@airtel or merchant@upi" required>
+          </div>
+          <div class="form-group">
+            <label>Business / Payee Display Name:</label>
+            <input type="text" id="upiName" class="form-control" placeholder="Cortex Store" required>
+          </div>
+          <div class="form-group">
+            <label>Merchant Webhook URL (POST):</label>
+            <input type="url" id="webhookUrl" class="form-control" placeholder="https://yourdomain.com/api/webhook">
+          </div>
+          <div class="form-group">
+            <label>Webhook Secret (HMAC-SHA256):</label>
+            <input type="text" id="webhookSecret" class="form-control" placeholder="secret_key_123">
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 16px;">
+            <button type="submit" class="btn-primary">Save Settings</button>
+            <button type="button" class="btn-secondary" onclick="testWebhook()">Test Webhook</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Airtel Payments Bank Live Soundbox & Transaction Alert Terminal -->
+      <div class="soundbox-card">
+        <div class="soundbox-header">
+          <div style="font-weight: 800; font-size: 15px; display: flex; align-items: center; gap: 8px;">
+            <span class="airtel-badge">AIRTEL BANK</span>
+            <span>Live Soundbox & Observer</span>
+          </div>
+          <div class="soundbox-pulse">
+            <span class="pulse-dot"></span>
+            <span id="soundboxStatus">Observing Credits</span>
+          </div>
+        </div>
+
+        <!-- Airtel Bank Login & Portal Launcher -->
+        <div class="airtel-login-btn-row">
+          <div style="flex: 1;">
+            <div style="font-size: 13px; font-weight: 700; color: white;">Airtel Payments Bank Dashboard</div>
+            <div style="font-size: 11px; color: #94a3b8;">Log in to access live account credits & passbook</div>
+          </div>
+          <a href="https://www.airtelpayments.bank.in/login" target="_blank" class="btn-airtel-login" title="Open official Airtel Bank Login">
+            <span>🔐 Open Airtel Login</span>
+            <span>↗</span>
+          </a>
+        </div>
+
+        <!-- Soundbox Audio Screen -->
+        <div class="soundbox-screen">
+          <div class="soundbox-live-amount" id="soundboxAmount">₹0.00</div>
+          <div class="soundbox-live-desc" id="soundboxDesc">Listening for live incoming UPI payments...</div>
+        </div>
+
+        <!-- Audio Controls -->
+        <div class="soundbox-controls">
+          <label class="toggle-label">
+            <input type="checkbox" id="voiceToggle" checked>
+            <span>🗣️ Voice Alert</span>
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" id="chimeToggle" checked>
+            <span>🔔 Sound Chime</span>
+          </label>
+          <button class="btn-sound-test" onclick="testSoundboxAlert()">🔊 Test Soundbox</button>
+        </div>
+
+        <!-- Ingest Airtel Bank SMS Alert -->
+        <div class="ingest-box">
+          <div class="ingest-title">
+            <span>📥 Ingest & Auto-Verify Airtel Bank SMS</span>
+            <button class="btn-sample" onclick="fillSampleAirtelSms()">Fill Sample SMS</button>
+          </div>
+          <input type="text" id="airtelSmsInput" class="ingest-input" placeholder="Paste Airtel SMS (e.g. credited with INR 499.00 by UPI Ref 430219876543)">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+            <button class="btn-ingest-action" onclick="ingestAirtelAlert()">Auto-Verify & Settle</button>
+            <span style="font-size: 10px; color: #94a3b8; font-family: monospace;">POST /api/observer/airtel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MacroDroid Automation Panel -->
+    <div class="macro-panel">
+      <div class="panel-title">
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span style="font-size: 20px;">📱</span>
+          <span>MacroDroid Android Automation (Auto-Verify Airtel Payments Bank)</span>
+          <span style="background: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 12px;">Instant Settlement (&lt;1s)</span>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <a href="/api/observer/macrodroid-macro" download="cortex_airtel_observer.macro" class="btn-primary" style="text-decoration: none; font-size: 12px; padding: 8px 14px; display: inline-flex; align-items: center; gap: 6px;">
+            <span>📥 Download .macro Template</span>
+          </a>
+          <button class="btn-secondary" onclick="simulateMacroDroidPayload()" style="font-size: 12px; padding: 8px 14px;">
+            ⚡ Simulate MacroDroid Dispatch
+          </button>
+        </div>
+      </div>
+      <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 12px;">
+        MacroDroid runs on your Android phone with the Airtel Payments Bank SIM/App and automatically posts every incoming credit SMS to this gateway in real-time.
+      </p>
+
+      <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 16px;">
+        <div>
+          <span style="font-size: 12px; font-weight: 700; color: #475569;">Webhook Receiver URL:</span>
+          <code id="macroEndpointDisplay" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: #0284c7; margin-left: 8px;">http://localhost:5000/api/observer/airtel</code>
+        </div>
+        <button class="btn-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="copyMacroEndpoint()">📋 Copy Endpoint</button>
+      </div>
+
+      <div class="macro-steps-grid">
+        <!-- Step 1 -->
+        <div class="macro-step-card">
+          <div>
+            <div style="font-weight: 700; font-size: 14px; display: flex; align-items: center; margin-bottom: 8px;">
+              <span class="macro-step-num">1</span>
+              <span>Install MacroDroid</span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+              Install <strong>MacroDroid</strong> from Google Play Store on your Android phone receiving Airtel Payments Bank SMS.
+            </p>
+          </div>
+          <a href="https://play.google.com/store/apps/details?id=com.arlosoft.macrodroid" target="_blank" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; padding: 8px 12px; text-align: center;">
+            <span>🛒 Open Google Play Store</span>
+            <span>↗</span>
+          </a>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="macro-step-card">
+          <div>
+            <div style="font-weight: 700; font-size: 14px; display: flex; align-items: center; margin-bottom: 8px;">
+              <span class="macro-step-num">2</span>
+              <span>1-Click Import or Setup</span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">
+              Download the <a href="/api/observer/macrodroid-macro" download style="color: var(--primary); font-weight: 700;">.macro file</a> and tap it to import in 1 click, or create a macro with:
+            </p>
+            <ul style="font-size: 11px; color: #334155; margin-left: 18px; line-height: 1.6;">
+              <li><strong>Trigger</strong>: <code>SMS Received</code> (Any sender or <code>*AIRTEL*</code>)</li>
+              <li><strong>Action</strong>: <code>Web Interactions &rarr; HTTP Request</code></li>
+              <li><strong>Method</strong>: <code>POST</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="macro-step-card">
+          <div>
+            <div style="font-weight: 700; font-size: 14px; display: flex; align-items: center; margin-bottom: 8px;">
+              <span class="macro-step-num">3</span>
+              <span>HTTP Body Payload</span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">
+              Set Content-Type: <code>application/json</code> and paste this body in MacroDroid:
+            </p>
+            <div class="macro-code">{
+  "message": "[sms_body]",
+  "sender": "[sms_number]"
+}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transactions & MacroDroid Ledger -->
+    <div class="panel">
+      <div class="panel-title" style="flex-wrap: wrap; gap: 12px;">
+        <div class="ledger-tab-group">
+          <button id="tabOrdersBtn" class="ledger-tab-btn active" onclick="switchLedgerTab('orders')">
+            <span>📜 Live Orders</span>
+            <span class="tab-count-badge" id="ordersCountBadge">0</span>
+          </button>
+          <button id="tabMacroBtn" class="ledger-tab-btn" onclick="switchLedgerTab('macro')">
+            <span>📥 MacroDroid Incoming Messages</span>
+            <span class="tab-count-badge" id="macroCountBadge">0</span>
+          </button>
+        </div>
+
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button id="btnClearCurrentLedger" class="btn-secondary" onclick="clearCurrentTab()" style="color: #ef4444; border-color: #fca5a5; font-size: 12px; padding: 6px 12px; display: inline-flex; align-items: center; gap: 6px;">
+            <span>🗑️ Clear Orders</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab 1: Orders Ledger View -->
+      <div id="ordersTableContainer" class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Product / Note</th>
+              <th>Amount</th>
+              <th>Customer</th>
+              <th>Status</th>
+              <th>Bank Ref (UTR)</th>
+              <th>Created At</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <tr><td colspan="8" style="text-align:center;">Loading ledger...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Tab 2: MacroDroid Incoming Messages View -->
+      <div id="macroTableContainer" class="table-responsive" style="display: none;">
+        <table>
+          <thead>
+            <tr>
+              <th>Received At</th>
+              <th>Sender</th>
+              <th>Inbound SMS / Alert Text</th>
+              <th>Amount</th>
+              <th>Bank Ref (UTR / Txn ID)</th>
+              <th>Payer VPA</th>
+              <th>Match Status</th>
+            </tr>
+          </thead>
+          <tbody id="macroTableBody">
+            <tr><td colspan="7" style="text-align:center;">No MacroDroid messages received yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Soundbox Audio Chime Synth
+    function playChime() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+        osc.frequency.setValueAtTime(880.00, ctx.currentTime + 0.12); // A5
+
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 0.6);
+      } catch {}
+    }
+
+    // Voice Announcement (Web Speech API)
+    function speakPayment(amountText) {
+      if (!('speechSynthesis' in window)) return;
+      const text = `Payment of ${amountText} rupees received on Airtel Payments Bank via UPI`;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-IN';
+      utterance.rate = 1.0;
+      utterance.pitch = 1.05;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function triggerSoundboxAlert(amount, customerName) {
+      const chimeEnabled = document.getElementById('chimeToggle').checked;
+      const voiceEnabled = document.getElementById('voiceToggle').checked;
+
+      document.getElementById('soundboxAmount').innerText = '₹' + Number(amount).toFixed(2);
+      document.getElementById('soundboxDesc').innerText = `Payment received from ${customerName || 'Customer'} via Airtel Bank!`;
+
+      if (chimeEnabled) playChime();
+      if (voiceEnabled) {
+        setTimeout(() => speakPayment(amount), 300);
+      }
+    }
+
+    function testSoundboxAlert() {
+      triggerSoundboxAlert(499, 'Test Customer');
+    }
+
+    // Connect to Server-Sent Events (SSE) for Real-Time Soundbox Alerts
+    function connectSoundboxStream() {
+      const sse = new EventSource('/api/admin/live-alerts');
+      sse.onmessage = function(e) {
+        try {
+          const payload = JSON.parse(e.data);
+          if (payload.event === 'LIVE_PAYMENT_ALERT' && payload.order) {
+            triggerSoundboxAlert(payload.order.amount, payload.order.customer_name);
+            loadDashboard(); // Auto-refresh orders
+            loadMacroMessages(); // Auto-refresh MacroDroid messages
+          } else if (payload.event === 'NEW_OBSERVER_MESSAGE') {
+            loadMacroMessages();
+          }
+        } catch {}
+      };
+      sse.onerror = function() {
+        document.getElementById('soundboxStatus').innerText = 'Reconnecting...';
+        setTimeout(connectSoundboxStream, 4000);
+      };
+      sse.onopen = function() {
+        document.getElementById('soundboxStatus').innerText = 'Observing Credits';
+      };
+    }
+
+    // Airtel Ingestion Helpers
+    function fillSampleAirtelSms() {
+      // Find latest pending order amount if available
+      const pendingRows = Array.from(document.querySelectorAll('#ordersTableBody tr'));
+      let sampleAmount = '499.00';
+      const sampleUtr = '4' + Math.floor(Math.random() * 89999999999 + 10000000000);
+
+      const sample = `Dear Customer, Your Airtel Payments Bank A/c ending 1234 credited with INR ${sampleAmount} on ${new Date().toLocaleDateString('en-GB')} by UPI Ref no ${sampleUtr}. Balance: INR 12500.00`;
+      document.getElementById('airtelSmsInput').value = sample;
+    }
+
+    async function ingestAirtelAlert() {
+      const text = document.getElementById('airtelSmsInput').value.trim();
+      if (!text) {
+        alert('Please enter or paste an Airtel Bank SMS / notification alert.');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/observer/airtel', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, sender: 'AD-AIRBNK' })
+        });
+        const data = await res.json();
+        if (data.success) {
+          if (data.matched) {
+            alert(`✓ Airtel Payment Matched & Settled!\n\nOrder ID: ${data.order_id}\nAmount: ₹${data.amount}\nUTR: ${data.utr}`);
+          } else {
+            alert(`✓ Airtel Alert Ingested!\n\nAmount: ₹${data.amount}\nUTR: ${data.utr}\n(No pending order with exact amount ₹${data.amount} found, but alert was broadcasted to soundbox)`);
+          }
+          document.getElementById('airtelSmsInput').value = '';
+          loadDashboard();
+        } else {
+          alert('[-] ' + (data.error || 'Ingestion failed'));
+        }
+      } catch (err) {
+        alert('[-] Ingestion Error: ' + err.message);
+      }
+    }
+
+    function copyMacroEndpoint() {
+      const url = window.location.origin + '/api/observer/airtel';
+      navigator.clipboard.writeText(url).then(() => {
+        alert('✓ MacroDroid Webhook URL copied to clipboard:\n\n' + url);
+      }).catch(() => {
+        prompt('Copy MacroDroid Webhook URL:', url);
+      });
+    }
+
+    async function simulateMacroDroidPayload() {
+      // Find latest pending order amount if available
+      let testAmount = 1.00;
+      try {
+        const rows = document.querySelectorAll('#ordersTableBody tr');
+        for (const row of rows) {
+          if (row.innerText.includes('PENDING')) {
+            const match = row.innerText.match(/₹([0-9]+(?:\.[0-9]{1,2})?)/);
+            if (match) {
+              testAmount = parseFloat(match[1]);
+              break;
+            }
+          }
+        }
+      } catch {}
+
+      const sampleTxnId = '561028' + Math.floor(Math.random() * 899999999 + 100000000);
+      const payload = {
+        message: `Payment received from payer@upi Transaction ID: ${sampleTxnId} Amount: +₹${testAmount.toFixed(2)}`,
+        sender: 'Airtel Payments Bank'
+      };
+
+      try {
+        const res = await fetch('/api/observer/airtel', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert(`⚡ MacroDroid Simulation Triggered Successfully!\n\nOutcome: ${data.matched ? 'MATCHED & SETTLED (Order Paid!)' : 'RECORDED (Soundbox Broadcasted)'}\nAmount: ₹${data.amount}\nTxn ID: ${data.utr}\nPayer: ${data.payer}`);
+          loadDashboard();
+        } else {
+          alert('[-] Simulation Error: ' + data.error);
+        }
+      } catch (err) {
+        alert('[-] Simulation Error: ' + err.message);
+      }
+    }
+
+    async function loadDashboard() {
+      try {
+        if (document.getElementById('macroEndpointDisplay')) {
+          document.getElementById('macroEndpointDisplay').innerText = window.location.origin + '/api/observer/airtel';
+        }
+
+        const metricsRes = await fetch('/api/admin/metrics');
+        const mData = await metricsRes.json();
+        if (mData.success) {
+          document.getElementById('mVolume').innerText = '₹' + mData.stats.totalVolume.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+          document.getElementById('mPaid').innerText = mData.stats.paidOrders;
+          document.getElementById('mPending').innerText = mData.stats.pendingOrders;
+          document.getElementById('mTotal').innerText = mData.stats.totalOrders;
+
+          document.getElementById('upiVpa').value = mData.settings.upi_vpa || '';
+          document.getElementById('upiName').value = mData.settings.upi_name || '';
+          document.getElementById('webhookUrl').value = mData.settings.webhook_url || '';
+        }
+
+        const setRes = await fetch('/api/admin/settings');
+        const sData = await setRes.json();
+        if (sData.success) {
+          document.getElementById('webhookSecret').value = sData.settings.webhook_secret || '';
+        }
+
+        const ordersRes = await fetch('/api/admin/orders');
+        const oData = await ordersRes.json();
+        const tbody = document.getElementById('ordersTableBody');
+        tbody.innerHTML = '';
+
+        const orders = oData.orders || [];
+        if (document.getElementById('ordersCountBadge')) {
+          document.getElementById('ordersCountBadge').innerText = orders.length;
+        }
+
+        if (orders.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:32px;">No orders recorded yet. Use the Developer Hub or API to initiate orders!</td></tr>';
+          return;
+        }
+
+        orders.forEach(o => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="font-family:monospace; font-weight:700;"><a href="/checkout/${o.order_id}" target="_blank" style="color:#4f46e5; text-decoration:none;">${o.order_id}</a></td>
+            <td>${o.product_name}</td>
+            <td style="font-weight:700;">₹${Number(o.amount).toFixed(2)}</td>
+            <td>${o.customer_name || 'Buyer'}</td>
+            <td><span class="status-badge status-${o.status}">${o.status}</span></td>
+            <td style="font-family:monospace; font-size:12px;">${o.utr || '—'}</td>
+            <td style="font-size:12px; color:#64748b;">${new Date(o.created_at).toLocaleString('en-IN')}</td>
+            <td>
+              ${o.status === 'PENDING' ? `
+                <button class="btn-sm-action" onclick="approveOrder('${o.order_id}')">Approve & Settle</button>
+              ` : `
+                <span style="color:#10b981; font-weight:700; font-size:11px;">✓ Settled</span>
+              `}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        console.error('Error loading dashboard:', err);
+      }
+    }
+
+    async function saveSettings(e) {
+      e.preventDefault();
+      try {
+        const payload = {
+          upi_vpa: document.getElementById('upiVpa').value,
+          upi_name: document.getElementById('upiName').value,
+          webhook_url: document.getElementById('webhookUrl').value,
+          webhook_secret: document.getElementById('webhookSecret').value
+        };
+        const res = await fetch('/api/admin/settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert('✓ Settings saved successfully!');
+        } else {
+          alert('[-] ' + data.error);
+        }
+      } catch (err) {
+        alert('[-] ' + err.message);
+      }
+    }
+
+    async function testWebhook() {
+      try {
+        const res = await fetch('/api/admin/webhook/test', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          alert('✓ Test Webhook Delivered Successfully!\n\nDelivery ID: ' + data.outcome.deliveryId + '\nSignature: ' + data.outcome.signature);
+        } else {
+          alert('[-] Webhook Test Failed: ' + (data.outcome?.error || data.error));
+        }
+      } catch (err) {
+        alert('[-] Webhook Test Error: ' + err.message);
+      }
+    }
+
+    async function approveOrder(orderId) {
+      const utr = prompt('Enter Bank Reference (UTR) or leave blank for auto-generated:', 'UTR' + Date.now());
+      if (utr === null) return;
+      try {
+        const res = await fetch(`/api/admin/orders/${orderId}/status`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'PAID', utr })
+        });
+        const data = await res.json();
+        if (data.success) {
+          loadDashboard();
+        } else {
+          alert('Error: ' + data.error);
+        }
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
+    }
+
+    // Extract escape helper
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    let activeLedgerTab = 'orders';
+
+    function switchLedgerTab(tab) {
+      activeLedgerTab = tab;
+      const ordersBtn = document.getElementById('tabOrdersBtn');
+      const macroBtn = document.getElementById('tabMacroBtn');
+      const ordersContainer = document.getElementById('ordersTableContainer');
+      const macroContainer = document.getElementById('macroTableContainer');
+      const clearBtn = document.getElementById('btnClearCurrentLedger');
+
+      if (tab === 'orders') {
+        ordersBtn.classList.add('active');
+        macroBtn.classList.remove('active');
+        ordersContainer.style.display = 'block';
+        macroContainer.style.display = 'none';
+        clearBtn.innerHTML = '<span>🗑️ Clear Orders</span>';
+        loadDashboard();
+      } else {
+        macroBtn.classList.add('active');
+        ordersBtn.classList.remove('active');
+        ordersContainer.style.display = 'none';
+        macroContainer.style.display = 'block';
+        clearBtn.innerHTML = '<span>🗑️ Clear Messages</span>';
+        loadMacroMessages();
+      }
+    }
+
+    async function loadMacroMessages() {
+      try {
+        const res = await fetch('/api/admin/observer-logs');
+        const data = await res.json();
+        const tbody = document.getElementById('macroTableBody');
+        tbody.innerHTML = '';
+
+        const logs = data.logs || [];
+        document.getElementById('macroCountBadge').innerText = logs.length;
+
+        if (logs.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#94a3b8; padding:32px;">No incoming MacroDroid messages received yet. Messages sent from MacroDroid on your phone will appear here in real time!</td></tr>';
+          return;
+        }
+
+        logs.forEach(log => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="font-size:12px; color:#64748b; white-space:nowrap;">${new Date(log.created_at).toLocaleString('en-IN')}</td>
+            <td style="font-weight:700; font-size:12px; color:#334155;">${escapeHtml(log.sender || 'MacroDroid')}</td>
+            <td><div class="msg-raw-text">${escapeHtml(log.raw_message)}</div></td>
+            <td style="font-weight:700; color:#0284c7;">${log.amount ? '₹' + Number(log.amount).toFixed(2) : '—'}</td>
+            <td style="font-family:monospace; font-size:12px;">${log.utr || '—'}</td>
+            <td style="font-family:monospace; font-size:12px; color:#475569;">${log.payer_vpa || '—'}</td>
+            <td>
+              <span class="status-badge status-${log.status}">
+                ${log.status === 'MATCHED' ? `✓ Matched (${log.matched_order_id})` : log.status}
+              </span>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        console.error('Error loading MacroDroid messages:', err);
+      }
+    }
+
+    async function clearCurrentTab() {
+      if (activeLedgerTab === 'orders') {
+        if (!confirm('Are you sure you want to clear all orders and reset the ledger?')) return;
+        try {
+          const res = await fetch('/api/admin/orders/clear', { method: 'POST' });
+          const data = await res.json();
+          if (data.success) {
+            loadDashboard();
+          } else {
+            alert('Error: ' + data.error);
+          }
+        } catch (err) {
+          alert('Error: ' + err.message);
+        }
+      } else {
+        if (!confirm('Are you sure you want to clear all incoming MacroDroid messages?')) return;
+        try {
+          const res = await fetch('/api/admin/observer-logs/clear', { method: 'POST' });
+          const data = await res.json();
+          if (data.success) {
+            loadMacroMessages();
+          } else {
+            alert('Error: ' + data.error);
+          }
+        } catch (err) {
+          alert('Error: ' + err.message);
+        }
+      }
+    }
+
+    // Initialize Dashboard directly on page load
+    loadDashboard();
+    loadMacroMessages();
+    connectSoundboxStream();
+  </script>
+</body>
+</html>

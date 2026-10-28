@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: cortex-upipay
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 24.14.1
+      - key: PORT
+        value: 10000
+      - key: UPI_VPA
+        value: merchant@upi
+      - key: UPI_NAME
+        value: Cortex Store
+      - key: ADMIN_PASSKEY
+        value: admin123
+

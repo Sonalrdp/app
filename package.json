@@ -1,0 +1,24 @@
+{
+  "name": "cortex-upipay",
+  "version": "2.0.0",
+  "description": "Unified 1-Port Self-Hosted UPI Payment Gateway with Admin Dashboard, Buyer Storefront, and Merchant REST API",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "db:setup": "node -e \"import('./src/db.js').then(() => console.log('[OK] Database initialized at data/gateway.sqlite'))\"",
+    "db:cli": "node src/cli.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "qrcode": "^1.5.4"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "author": "Cortex Systems",
+  "license": "MIT"
+}
